@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import GlobalStyles from "./GlobalStyles";
+import { ThemeProvider } from "styled-components";
+import { theme } from "./theme";
+import SearchBar from "./components/SearchBar";
+import MovieList from "./components/MovieList";
+import MovieDetails from "./components/MovieDetails";
+import FavoritesList from "./components/FavoritesList";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [movies, setMovies] = React.useState([]);
+
+  const handleSearch = async (query: string) => {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=6f84d94abf6ee02052af90bf7f4a03b8&query=${query}`
+      );
+      const data = await response.json();
+      setMovies(data.results);
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Router>
+        <SearchBar onSearch={handleSearch} />
+        <Routes>
+          <Route path="/" element={<MovieList movies={movies} />} />
+          <Route path="/movie/:id" element={<MovieDetails movieId={1858} />} />
+          <Route path="/favorites" element={<FavoritesList />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
