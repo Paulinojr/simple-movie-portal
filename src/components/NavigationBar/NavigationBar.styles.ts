@@ -5,7 +5,11 @@ const NavBar = styled.nav`
   background-color: ${(props) => props.theme.colors.primary};
   padding: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+
+  @media (min-width: ${(props) => props.theme.breakpoints.mobile}) {
+    justify-content: space-evenly;
+  }
 `;
 
 const NavLink = styled(Link)`

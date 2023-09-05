@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalStyles from "./GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
-import SearchBar from "./components/SearchBar";
+import SearchBar from "./components/SearchBar/SearchBar";
 import MovieList from "./components/MovieList/MovieList";
 import MovieDetails from "./components/MovieDetails/MovieDetails";
 import FavoritesList from "./components/FavoritesList/FavoritesList";
+import NavigationBar from "./components/NavigationBar/NavigationBar";
 
 function App() {
   const [movies, setMovies] = React.useState([]);
@@ -27,6 +28,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Router>
+        <NavigationBar />
         <SearchBar onSearch={handleSearch} />
         <Routes>
           <Route path="/" element={<MovieList movies={movies} />} />
