@@ -11,7 +11,7 @@ import {
 } from "./MovieDetails.styles";
 
 interface MovieDetailsProps {
-  movieId: number;
+  movieId?: number;
 }
 
 const MovieDetails: React.FC<MovieDetailsProps> = () => {
