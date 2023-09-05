@@ -4,9 +4,9 @@ import GlobalStyles from "./GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 import SearchBar from "./components/SearchBar";
-import MovieList from "./components/MovieList";
-import MovieDetails from "./components/MovieDetails";
-import FavoritesList from "./components/FavoritesList";
+import MovieList from "./components/MovieList/MovieList";
+import MovieDetails from "./components/MovieDetails/MovieDetails";
+import FavoritesList from "./components/FavoritesList/FavoritesList";
 
 function App() {
   const [movies, setMovies] = React.useState([]);

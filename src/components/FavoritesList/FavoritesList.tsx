@@ -1,28 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { Movie } from "../types/Movie";
-
-const FavoritesListContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-`;
-
-const FavoriteItem = styled.div`
-  width: 100%;
-  max-width: 600px;
-  margin: 10px;
-  padding: 10px;
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-
-  @media (min-width: ${(props) => props.theme.breakpoints.mobile}) {
-    display: flex;
-    justify-content: space-between;
-  }
-`;
+import { Movie } from "../../types/Movie";
+import { FavoritesListContainer, FavoriteItem } from "./FavoritesList.styles";
 
 const FavoritesList: React.FC = () => {
   const [favorites, setFavorites] = useState<Movie[]>([]);
